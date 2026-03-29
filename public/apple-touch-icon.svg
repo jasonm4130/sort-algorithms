@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 180 180" fill="none">
+  <!-- Dark background so bars are readable when iOS applies its mask -->
+  <rect width="180" height="180" fill="#000000"/>
+  <!--
+    4 ascending bars scaled to 180×180, bottom-aligned.
+    Same proportions as the 32×32 favicon (scale ≈ 5.4).
+    Bar width 32, gap 12, total = 4×32 + 3×12 = 164, left offset = (180-164)/2 = 8.
+    Heights (original × scale): 8→43, 14→76, 20→108, 28→151.
+    Bottom baseline at y=170 (10px padding).
+  -->
+  <rect x="8"   y="127" width="32" height="43"  rx="6" fill="#fca311"/>
+  <rect x="52"  y="94"  width="32" height="76"  rx="6" fill="#fca311"/>
+  <rect x="96"  y="62"  width="32" height="108" rx="6" fill="#fca311"/>
+  <rect x="140" y="19"  width="32" height="151" rx="6" fill="#fca311"/>
+</svg>

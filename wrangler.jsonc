@@ -1,0 +1,6 @@
+// wrangler.jsonc — Cloudflare Pages static site
+{
+  "$schema": "./node_modules/wrangler/config-schema.json",
+  "name": "sort-algorithms",
+  "pages_build_output_dir": "./dist"
+}

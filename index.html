@@ -1,0 +1,33 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="apple-touch-icon" href="/apple-touch-icon.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="theme-color" content="#fca311" />
+    <meta name="description" content="Interactive visualizations of 25 sorting algorithms — from O(n log n) introsort and timsort to the cosmic absurdity of miracle sort and quantum bogosort." />
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="Sort Algorithms — Interactive Visualizations" />
+    <meta property="og:description" content="Interactive visualizations of 25 sorting algorithms — from everyday workhorses to delightfully terrible ideas." />
+    <meta property="og:image" content="/apple-touch-icon.svg" />
+    <title>Sort Algorithms — Interactive Visualizations</title>
+    <!--
+      Inline theme bootstrap — runs before React/CSS to prevent flash.
+      Reads localStorage, falls back to OS preference, defaults to dark.
+    -->
+    <script>
+      ;(function () {
+        var t = localStorage.getItem('theme')
+        if (t !== 'dark' && t !== 'light') {
+          t = window.matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark'
+        }
+        document.documentElement.setAttribute('data-theme', t)
+      })()
+    </script>
+  </head>
+  <body>
+    <div id="root"></div>
+    <script type="module" src="/src/main.tsx"></script>
+  </body>
+</html>

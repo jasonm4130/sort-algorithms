@@ -1,0 +1,2 @@
+# SPA catch-all: serve index.html for all paths not matched by an asset
+/*    /index.html   200

@@ -1,0 +1,160 @@
+@import "tailwindcss";
+@import "tw-animate-css";
+
+/* ── Dark theme (default) ───────────────────────────────────────────────── */
+:root {
+  color-scheme: dark;
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+
+  /*
+   * Palette:
+   *   black          #000000   prussian_blue  #14213d
+   *   orange         #fca311   alabaster_grey #e5e5e5   white #ffffff
+   */
+
+  /* Surfaces */
+  --color-bg:             #000000;   /* black                          */
+  --color-surface:        #14213d;   /* prussian_blue                  */
+  --color-surface-raised: #29447e;   /* prussian_blue-600              */
+
+  /* Text */
+  --color-text:           #ffffff;   /* white                          */
+  --color-text-muted:     #beccea;   /* prussian_blue-900              */
+
+  /* Chrome */
+  --color-border:         #29447e;   /* prussian_blue-600              */
+  --color-accent:         #fca311;   /* orange                         */
+
+  /* Bar state colours */
+  --color-bar-default:    #3e67bf;   /* prussian_blue-700              */
+  --color-bar-comparing:  #fca311;   /* orange                         */
+  --color-bar-swapping:   #fdb541;   /* orange-600                     */
+  --color-bar-sorted:     #e5e5e5;   /* alabaster_grey                 */
+  --color-bar-pivot:      #7e99d5;   /* prussian_blue-800              */
+
+  /* shadcn/ui semantic tokens */
+  --background: var(--color-bg);
+  --foreground: var(--color-text);
+  --card: var(--color-surface);
+  --card-foreground: var(--color-text);
+  --popover: var(--color-surface);
+  --popover-foreground: var(--color-text);
+  --primary: var(--color-accent);
+  --primary-foreground: var(--color-bg);
+  --secondary: var(--color-surface-raised);
+  --secondary-foreground: var(--color-text);
+  --muted: var(--color-surface);
+  --muted-foreground: var(--color-text-muted);
+  --accent: var(--color-surface-raised);
+  --accent-foreground: var(--color-text);
+  --destructive: #ef4444;
+  --destructive-foreground: #fafaf8;
+  --border: var(--color-border);
+  --input: var(--color-surface-raised);
+  --ring: var(--color-accent);
+  --radius: 0.5rem;
+}
+
+/* ── Light theme ────────────────────────────────────────────────────────── */
+[data-theme='light'] {
+  color-scheme: light;
+
+  /* Surfaces */
+  --color-bg:             #fafafa;   /* alabaster_grey-900            */
+  --color-surface:        #ffffff;   /* white                         */
+  --color-surface-raised: #ebebeb;   /* alabaster_grey-600            */
+
+  /* Text */
+  --color-text:           #000000;   /* black                         */
+  --color-text-muted:     #333333;   /* black-600                     */
+
+  /* Chrome */
+  --color-border:         #b8b8b8;   /* alabaster_grey-400            */
+  --color-accent:         #14213d;   /* prussian_blue                 */
+
+  /* Bar state colours */
+  --color-bar-default:    #3e67bf;   /* prussian_blue-700             */
+  --color-bar-comparing:  #fca311;   /* orange                        */
+  --color-bar-swapping:   #a16402;   /* orange-400                    */
+  --color-bar-sorted:     #14213d;   /* prussian_blue                 */
+  --color-bar-pivot:      #7e99d5;   /* prussian_blue-800             */
+}
+
+/* ── Tailwind v4 theme registration ─────────────────────────────────────── */
+/* `inline` = Tailwind reads values as-is, no duplicate CSS var generated   */
+@theme inline {
+  --font-sans: system-ui, 'Segoe UI', Roboto, sans-serif;
+  --font-mono: ui-monospace, Consolas, 'Cascadia Code', monospace;
+
+  /* Brand tokens → utility classes (bg-bg, text-surface-raised, etc.) */
+  --color-bg: var(--color-bg);
+  --color-surface: var(--color-surface);
+  --color-surface-raised: var(--color-surface-raised);
+  --color-text: var(--color-text);
+  --color-text-muted: var(--color-text-muted);
+  --color-border: var(--color-border);
+  --color-accent: var(--color-accent);
+  --color-bar-default: var(--color-bar-default);
+  --color-bar-comparing: var(--color-bar-comparing);
+  --color-bar-swapping: var(--color-bar-swapping);
+  --color-bar-sorted: var(--color-bar-sorted);
+  --color-bar-pivot: var(--color-bar-pivot);
+
+  /* shadcn semantic names → utility classes (bg-background, text-foreground, etc.) */
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent-ui: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-md: var(--radius);
+  --radius-lg: calc(var(--radius) + 4px);
+}
+
+/* ── Base ───────────────────────────────────────────────────────────────── */
+@layer base {
+  *,
+  *::before,
+  *::after {
+    box-sizing: border-box;
+  }
+
+  html {
+    font-family: var(--font-sans);
+    color: var(--color-text);
+    background: var(--color-bg);
+    line-height: 1.5;
+  }
+
+  body {
+    min-height: 100dvh;
+  }
+
+  #root {
+    min-height: 100dvh;
+    display: flex;
+    flex-direction: column;
+  }
+}
+
+/* ── Bar visualizer (dynamic values; Tailwind utilities can't cover these) ─ */
+.array-bar {
+  border-radius: 2px 2px 0 0;
+  flex-shrink: 0;
+}
+
