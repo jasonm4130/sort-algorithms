@@ -1,5 +1,5 @@
 import { useNavigate, useParams } from 'react-router'
-import { useCallback, useRef } from 'react'
+import { useCallback, useRef, useState } from 'react'
 import { ALGORITHM_MAP } from '../constants/algorithms.ts'
 import { useAlgorithmPlayer } from '../hooks/useAlgorithmPlayer.ts'
 import { useSound } from '../hooks/useSound.ts'
@@ -8,12 +8,14 @@ import { Controls } from '../components/Controls/Controls.tsx'
 import { AlgorithmSelector } from '../components/AlgorithmSelector/AlgorithmSelector.tsx'
 import { ComplexityTable } from '../components/ComplexityTable/ComplexityTable.tsx'
 import { StepCodeWalkthrough } from '../components/StepCodeWalkthrough/StepCodeWalkthrough.tsx'
+import { Menu, X } from 'react-feather'
 import type { Step } from '../types/index.ts'
 
 export default function Visualizer() {
   const { id = 'bubble-sort' } = useParams<{ id: string }>()
   const navigate = useNavigate()
   const currentStepRef = useRef<Step | null>(null)
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
 
   const algo = ALGORITHM_MAP.get(id) ?? ALGORITHM_MAP.get('bubble-sort')!
 
@@ -23,13 +25,35 @@ export default function Visualizer() {
   const handleSelect = useCallback(
     (newId: string) => {
       navigate(`/algorithm/${newId}`)
+      setMobileMenuOpen(false)
     },
     [navigate],
   )
 
   return (
     <div className="grid h-[calc(100dvh-3.5rem)] grid-cols-[220px_1fr] max-md:grid-cols-1 max-md:h-auto">
-      <aside className="overflow-y-auto border-r border-border bg-surface py-4 max-md:border-r-0 max-md:border-b">
+      {/* Mobile algorithm picker toggle */}
+      <div className="hidden max-md:flex items-center justify-between border-b border-border bg-surface px-4 py-2.5">
+        <span className="text-sm font-semibold text-text">{algo.name}</span>
+        <button
+          className="rounded-md p-1.5 text-text-muted transition-colors hover:bg-surface-raised hover:text-text"
+          onClick={() => setMobileMenuOpen((o) => !o)}
+          aria-label={mobileMenuOpen ? 'Close algorithm menu' : 'Open algorithm menu'}
+          aria-expanded={mobileMenuOpen}
+        >
+          {mobileMenuOpen ? <X size={20} /> : <Menu size={20} />}
+        </button>
+      </div>
+
+      {/* Mobile collapsible menu */}
+      {mobileMenuOpen && (
+        <div className="hidden max-md:block max-h-[50dvh] overflow-y-auto border-b border-border bg-surface">
+          <AlgorithmSelector selectedId={id} onSelect={handleSelect} />
+        </div>
+      )}
+
+      {/* Desktop sidebar — always visible */}
+      <aside className="overflow-y-auto border-r border-border bg-surface py-4 max-md:hidden">
         <AlgorithmSelector selectedId={id} onSelect={handleSelect} />
       </aside>
 
