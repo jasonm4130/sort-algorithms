@@ -18,8 +18,8 @@
     "lint:fix": "eslint . --fix",
     "format": "prettier --write .",
     "format:check": "prettier --check .",
-    "pages:dev": "wrangler pages dev dist",
-    "pages:deploy": "npm run build && wrangler pages deploy dist --project-name=sort-algorithms",
+    "dev:edge": "wrangler dev",
+    "deploy": "npm run build && wrangler deploy",
     "ci": "npm run typecheck && npm run lint && npm run test:run && npm run build"
   },
   "dependencies": {
