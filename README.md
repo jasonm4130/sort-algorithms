@@ -73,7 +73,8 @@ src/
   types/        Shared TypeScript types
 public/
   _headers      Cloudflare Workers security headers
-  index.html    SPA fallback route
+index.html      Vite entry point → dist/index.html (SPA fallback via
+                wrangler.jsonc assets.not_found_handling)
 ```
 
 Each algorithm file exports two things:
