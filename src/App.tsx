@@ -18,10 +18,7 @@ function Nav() {
           <Logo />
         </Link>
         {!onHome && (
-          <Link
-            to="/"
-            className="text-sm text-text-muted transition-colors hover:text-text"
-          >
+          <Link to="/" className="text-sm text-text-muted transition-colors hover:text-text">
             ← All algorithms
           </Link>
         )}

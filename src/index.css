@@ -15,24 +15,24 @@
    */
 
   /* Surfaces */
-  --color-bg:             #000000;   /* black                          */
-  --color-surface:        #14213d;   /* prussian_blue                  */
-  --color-surface-raised: #29447e;   /* prussian_blue-600              */
+  --color-bg: #000000; /* black                          */
+  --color-surface: #14213d; /* prussian_blue                  */
+  --color-surface-raised: #29447e; /* prussian_blue-600              */
 
   /* Text */
-  --color-text:           #ffffff;   /* white                          */
-  --color-text-muted:     #beccea;   /* prussian_blue-900              */
+  --color-text: #ffffff; /* white                          */
+  --color-text-muted: #beccea; /* prussian_blue-900              */
 
   /* Chrome */
-  --color-border:         #29447e;   /* prussian_blue-600              */
-  --color-accent:         #fca311;   /* orange                         */
+  --color-border: #29447e; /* prussian_blue-600              */
+  --color-accent: #fca311; /* orange                         */
 
   /* Bar state colours */
-  --color-bar-default:    #3e67bf;   /* prussian_blue-700              */
-  --color-bar-comparing:  #fca311;   /* orange                         */
-  --color-bar-swapping:   #fdb541;   /* orange-600                     */
-  --color-bar-sorted:     #e5e5e5;   /* alabaster_grey                 */
-  --color-bar-pivot:      #7e99d5;   /* prussian_blue-800              */
+  --color-bar-default: #3e67bf; /* prussian_blue-700              */
+  --color-bar-comparing: #fca311; /* orange                         */
+  --color-bar-swapping: #fdb541; /* orange-600                     */
+  --color-bar-sorted: #e5e5e5; /* alabaster_grey                 */
+  --color-bar-pivot: #7e99d5; /* prussian_blue-800              */
 
   /* shadcn/ui semantic tokens */
   --background: var(--color-bg);
@@ -58,35 +58,35 @@
 }
 
 /* ── Light theme ────────────────────────────────────────────────────────── */
-[data-theme='light'] {
+[data-theme="light"] {
   color-scheme: light;
 
   /* Surfaces */
-  --color-bg:             #fafafa;   /* alabaster_grey-900            */
-  --color-surface:        #ffffff;   /* white                         */
-  --color-surface-raised: #ebebeb;   /* alabaster_grey-600            */
+  --color-bg: #fafafa; /* alabaster_grey-900            */
+  --color-surface: #ffffff; /* white                         */
+  --color-surface-raised: #ebebeb; /* alabaster_grey-600            */
 
   /* Text */
-  --color-text:           #000000;   /* black                         */
-  --color-text-muted:     #333333;   /* black-600                     */
+  --color-text: #000000; /* black                         */
+  --color-text-muted: #333333; /* black-600                     */
 
   /* Chrome */
-  --color-border:         #b8b8b8;   /* alabaster_grey-400            */
-  --color-accent:         #14213d;   /* prussian_blue                 */
+  --color-border: #b8b8b8; /* alabaster_grey-400            */
+  --color-accent: #14213d; /* prussian_blue                 */
 
   /* Bar state colours */
-  --color-bar-default:    #3e67bf;   /* prussian_blue-700             */
-  --color-bar-comparing:  #fca311;   /* orange                        */
-  --color-bar-swapping:   #a16402;   /* orange-400                    */
-  --color-bar-sorted:     #14213d;   /* prussian_blue                 */
-  --color-bar-pivot:      #7e99d5;   /* prussian_blue-800             */
+  --color-bar-default: #3e67bf; /* prussian_blue-700             */
+  --color-bar-comparing: #fca311; /* orange                        */
+  --color-bar-swapping: #a16402; /* orange-400                    */
+  --color-bar-sorted: #14213d; /* prussian_blue                 */
+  --color-bar-pivot: #7e99d5; /* prussian_blue-800             */
 }
 
 /* ── Tailwind v4 theme registration ─────────────────────────────────────── */
 /* `inline` = Tailwind reads values as-is, no duplicate CSS var generated   */
 @theme inline {
-  --font-sans: system-ui, 'Segoe UI', Roboto, sans-serif;
-  --font-mono: ui-monospace, Consolas, 'Cascadia Code', monospace;
+  --font-sans: system-ui, "Segoe UI", Roboto, sans-serif;
+  --font-mono: ui-monospace, Consolas, "Cascadia Code", monospace;
 
   /* Brand tokens → utility classes (bg-bg, text-surface-raised, etc.) */
   --color-bg: var(--color-bg);
@@ -157,4 +157,3 @@
   border-radius: 2px 2px 0 0;
   flex-shrink: 0;
 }
-

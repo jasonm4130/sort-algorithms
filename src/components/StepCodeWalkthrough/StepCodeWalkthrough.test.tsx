@@ -10,10 +10,7 @@ describe('StepCodeWalkthrough', () => {
 
   it('highlights the active line matching current step type', () => {
     render(
-      <StepCodeWalkthrough
-        algorithmId="bubble-sort"
-        currentStep={{ type: 'swap', i: 0, j: 1 }}
-      />,
+      <StepCodeWalkthrough algorithmId="bubble-sort" currentStep={{ type: 'swap', i: 0, j: 1 }} />
     )
     const activeLines = document.querySelectorAll('[aria-current="true"]')
     expect(activeLines.length).toBeGreaterThan(0)

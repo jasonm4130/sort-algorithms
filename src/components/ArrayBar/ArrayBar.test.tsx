@@ -10,7 +10,7 @@ describe('ArrayBar', () => {
     render(
       <MotionConfig reducedMotion="always">
         <ArrayBar bar={bar} maxValue={100} />
-      </MotionConfig>,
+      </MotionConfig>
     )
     // aria-hidden so no role, but it should be in the DOM
     const el = document.querySelector('.array-bar')
@@ -21,7 +21,7 @@ describe('ArrayBar', () => {
     const { container } = render(
       <MotionConfig reducedMotion="always">
         <ArrayBar bar={bar} maxValue={100} />
-      </MotionConfig>,
+      </MotionConfig>
     )
     expect(container.querySelector('[aria-hidden="true"]')).toBeTruthy()
   })

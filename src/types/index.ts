@@ -13,12 +13,7 @@ export type Step =
   | { type: 'mark-sorted'; indices: number[] }
   | { type: 'done' }
 
-export type AlgorithmGroup =
-  | 'quadratic'
-  | 'efficient'
-  | 'hybrid'
-  | 'distribution'
-  | 'novelty'
+export type AlgorithmGroup = 'quadratic' | 'efficient' | 'hybrid' | 'distribution' | 'novelty'
 
 export interface Complexity {
   best: string

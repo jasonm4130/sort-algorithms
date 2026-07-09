@@ -1,10 +1,6 @@
 import type { ArrayEntry, Step } from '../types/index.ts'
 
-function* partitionSteps(
-  a: ArrayEntry[],
-  low: number,
-  high: number
-): Generator<Step, number> {
+function* partitionSteps(a: ArrayEntry[], low: number, high: number): Generator<Step, number> {
   const pivotIdx = high
   yield { type: 'pivot', i: pivotIdx }
   const pivotVal = a[high].value

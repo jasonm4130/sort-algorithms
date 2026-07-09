@@ -12,8 +12,7 @@ describe('Capitalist Sort', () => {
       expect(capitalistSort([1, 2, 3])).toEqual([0, 0, 6]))
     it('concentrates wealth for a larger input', () =>
       expect(capitalistSort([3, 1, 4, 1, 5])).toEqual([0, 0, 0, 0, 14]))
-    it('handles all-equal input', () =>
-      expect(capitalistSort([4, 4])).toEqual([0, 8]))
+    it('handles all-equal input', () => expect(capitalistSort([4, 4])).toEqual([0, 8]))
     it('handles all-zero input (stays all zeros)', () =>
       expect(capitalistSort([0, 0, 0])).toEqual([0, 0, 0]))
 
@@ -57,10 +56,7 @@ describe('Capitalist Sort', () => {
     it('handles single element (mark-sorted then done)', () => {
       const arr = toEntries([7])
       const steps = [...capitalistSortSteps(arr)]
-      expect(steps).toEqual([
-        { type: 'mark-sorted', indices: [0] },
-        { type: 'done' },
-      ])
+      expect(steps).toEqual([{ type: 'mark-sorted', indices: [0] }, { type: 'done' }])
     })
 
     it('does not mutate original input', () => {

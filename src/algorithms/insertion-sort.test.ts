@@ -7,7 +7,8 @@ describe('Insertion Sort', () => {
     it('handles empty array', () => expect(insertionSort([])).toEqual([]))
     it('handles single element', () => expect(insertionSort([1])).toEqual([1]))
     it('sorts already sorted', () => expect(insertionSort([1, 2, 3])).toEqual([1, 2, 3]))
-    it('sorts reverse sorted', () => expect(insertionSort([5, 4, 3, 2, 1])).toEqual([1, 2, 3, 4, 5]))
+    it('sorts reverse sorted', () =>
+      expect(insertionSort([5, 4, 3, 2, 1])).toEqual([1, 2, 3, 4, 5]))
     it('handles duplicates', () => expect(insertionSort([3, 1, 4, 1, 5])).toEqual([1, 1, 3, 4, 5]))
   })
 
@@ -31,7 +32,9 @@ describe('Insertion Sort', () => {
 
     it('performs O(n) comparisons on already sorted input', () => {
       const arr = toEntries([1, 2, 3, 4, 5])
-      const comparisons = [...insertionSortSteps(arr)].filter((s) => (s as {type:string}).type === 'compare')
+      const comparisons = [...insertionSortSteps(arr)].filter(
+        (s) => (s as { type: string }).type === 'compare'
+      )
       expect(comparisons.length).toBeLessThanOrEqual(4) // n-1 comparisons best case
     })
   })

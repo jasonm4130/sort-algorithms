@@ -1,10 +1,6 @@
 import type { ArrayEntry, Step } from '../types/index.ts'
 
-function* mergeSortHelper(
-  a: ArrayEntry[],
-  left: number,
-  right: number
-): Generator<Step> {
+function* mergeSortHelper(a: ArrayEntry[], left: number, right: number): Generator<Step> {
   if (right - left <= 1) return
 
   const mid = Math.floor((left + right) / 2)

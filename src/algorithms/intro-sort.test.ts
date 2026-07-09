@@ -36,13 +36,20 @@ describe('Intro Sort', () => {
 
   describe('introSortSteps generator', () => {
     it('final step is done', () => {
-      const arr = [{ id: '1', value: 3 }, { id: '2', value: 1 }, { id: '3', value: 2 }]
+      const arr = [
+        { id: '1', value: 3 },
+        { id: '2', value: 1 },
+        { id: '3', value: 2 },
+      ]
       const steps = [...introSortSteps(arr)]
       expect(steps.at(-1)).toEqual({ type: 'done' })
     })
 
     it('does not mutate original input', () => {
-      const arr = [{ id: '1', value: 3 }, { id: '2', value: 1 }]
+      const arr = [
+        { id: '1', value: 3 },
+        { id: '2', value: 1 },
+      ]
       const original = JSON.stringify(arr)
       void [...introSortSteps(arr)]
       expect(JSON.stringify(arr)).toBe(original)

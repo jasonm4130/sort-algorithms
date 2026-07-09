@@ -23,12 +23,7 @@ function* insertionRangeSteps(a: ArrayEntry[], left: number, right: number): Gen
 // Heapify for a subarray where `left` is the heap root (absolute index).
 // Children of node at absolute index i: (2i - left + 1) and (2i - left + 2)
 // n is the exclusive upper bound (absolute index)
-function* heapifyRangeSteps(
-  a: ArrayEntry[],
-  left: number,
-  n: number,
-  i: number,
-): Generator<Step> {
+function* heapifyRangeSteps(a: ArrayEntry[], left: number, n: number, i: number): Generator<Step> {
   let largest = i
   const l = 2 * i - left + 1
   const r = 2 * i - left + 2
@@ -62,11 +57,7 @@ function* heapSortRangeSteps(a: ArrayEntry[], left: number, right: number): Gene
 }
 
 // Lomuto partition — mirrors quick-sort.ts for visual consistency
-function* partitionRangeSteps(
-  a: ArrayEntry[],
-  low: number,
-  high: number,
-): Generator<Step, number> {
+function* partitionRangeSteps(a: ArrayEntry[], low: number, high: number): Generator<Step, number> {
   yield { type: 'pivot', i: high }
   const pivotVal = a[high].value
   let i = low - 1
@@ -91,7 +82,7 @@ function* introImpl(
   a: ArrayEntry[],
   left: number,
   right: number,
-  depthLimit: number,
+  depthLimit: number
 ): Generator<Step> {
   if (left >= right) return
   if (right - left + 1 <= INSERTION_THRESHOLD) {

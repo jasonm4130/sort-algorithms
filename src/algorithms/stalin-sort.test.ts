@@ -11,8 +11,7 @@ describe('Stalin Sort', () => {
       expect(stalinSort([1, 2, 3, 4])).toEqual([1, 2, 3, 4]))
     it('returns only first element for reverse sorted array', () =>
       expect(stalinSort([4, 3, 2, 1])).toEqual([4]))
-    it('removes out-of-order elements', () =>
-      expect(stalinSort([1, 3, 2, 4])).toEqual([1, 3, 4]))
+    it('removes out-of-order elements', () => expect(stalinSort([1, 3, 2, 4])).toEqual([1, 3, 4]))
     it('keeps duplicates that are non-decreasing', () =>
       expect(stalinSort([1, 2, 2, 3])).toEqual([1, 2, 2, 3]))
     it('removes elements below the running maximum', () =>

@@ -31,7 +31,9 @@ describe('Bubble Sort', () => {
 
     it('performs n(n-1)/2 comparisons on worst case', () => {
       const arr = toEntries([5, 4, 3, 2, 1])
-      const comparisons = [...bubbleSortSteps(arr)].filter((s) => (s as {type:string}).type === 'compare')
+      const comparisons = [...bubbleSortSteps(arr)].filter(
+        (s) => (s as { type: string }).type === 'compare'
+      )
       expect(comparisons).toHaveLength(10) // 5*4/2
     })
   })

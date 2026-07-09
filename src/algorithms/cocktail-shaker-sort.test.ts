@@ -62,9 +62,9 @@ describe('Cocktail Shaker Sort', () => {
     })
 
     it('terminates early on already-sorted input (O(n) best case)', () => {
-      const steps = [...cocktailShakerSortSteps(
-        [1, 2, 3, 4, 5].map((v, i) => ({ id: String(i), value: v }))
-      )]
+      const steps = [
+        ...cocktailShakerSortSteps([1, 2, 3, 4, 5].map((v, i) => ({ id: String(i), value: v }))),
+      ]
       const swaps = steps.filter((s) => s.type === 'swap')
       expect(swaps).toHaveLength(0)
     })
@@ -72,13 +72,20 @@ describe('Cocktail Shaker Sort', () => {
 
   describe('cocktailShakerSortSteps generator', () => {
     it('final step is done', () => {
-      const arr = [{ id: '1', value: 3 }, { id: '2', value: 1 }, { id: '3', value: 2 }]
+      const arr = [
+        { id: '1', value: 3 },
+        { id: '2', value: 1 },
+        { id: '3', value: 2 },
+      ]
       const steps = [...cocktailShakerSortSteps(arr)]
       expect(steps.at(-1)).toEqual({ type: 'done' })
     })
 
     it('does not mutate original input', () => {
-      const arr = [{ id: '1', value: 3 }, { id: '2', value: 1 }]
+      const arr = [
+        { id: '1', value: 3 },
+        { id: '2', value: 1 },
+      ]
       const original = JSON.stringify(arr)
       void [...cocktailShakerSortSteps(arr)]
       expect(JSON.stringify(arr)).toBe(original)

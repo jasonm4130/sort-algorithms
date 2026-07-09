@@ -31,8 +31,8 @@ describe('Counting Sort', () => {
 
     it('all steps are overwrite type (except done and mark-sorted)', () => {
       const steps = [...countingSortSteps(toEntries([3, 1, 2]))]
-      const nonDone = steps.filter(s => s.type !== 'done' && s.type !== 'mark-sorted')
-      expect(nonDone.every(s => s.type === 'overwrite')).toBe(true)
+      const nonDone = steps.filter((s) => s.type !== 'done' && s.type !== 'mark-sorted')
+      expect(nonDone.every((s) => s.type === 'overwrite')).toBe(true)
     })
   })
 })

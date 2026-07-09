@@ -1,5 +1,14 @@
 import type { PlayerStatus } from '../../types/index.ts'
-import { Pause, Play, RotateCcw, Shuffle, SkipBack, SkipForward, Volume2, VolumeX } from 'react-feather'
+import {
+  Pause,
+  Play,
+  RotateCcw,
+  Shuffle,
+  SkipBack,
+  SkipForward,
+  Volume2,
+  VolumeX,
+} from 'react-feather'
 import { Button } from '@/components/ui/button.tsx'
 import { Slider } from '@/components/ui/slider.tsx'
 
@@ -136,4 +145,3 @@ export function Controls({
     </div>
   )
 }
-

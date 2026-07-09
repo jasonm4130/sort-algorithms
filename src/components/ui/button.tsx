@@ -11,8 +11,7 @@ const buttonVariants = cva(
         default: 'bg-primary text-primary-foreground shadow hover:opacity-85',
         secondary: 'bg-secondary text-secondary-foreground hover:bg-surface-raised/80',
         ghost: 'hover:bg-surface-raised hover:text-text',
-        outline:
-          'border border-border bg-surface-raised text-text shadow-sm hover:bg-border',
+        outline: 'border border-border bg-surface-raised text-text shadow-sm hover:bg-border',
       },
       size: {
         default: 'h-9 px-4 py-2',
@@ -25,7 +24,7 @@ const buttonVariants = cva(
       variant: 'outline',
       size: 'icon',
     },
-  },
+  }
 )
 
 interface ButtonProps
@@ -40,7 +39,7 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
     return (
       <Comp className={cn(buttonVariants({ variant, size, className }))} ref={ref} {...props} />
     )
-  },
+  }
 )
 Button.displayName = 'Button'
 

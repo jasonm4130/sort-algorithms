@@ -6,10 +6,7 @@ export function toEntries(values: number[]): ArrayEntry[] {
 }
 
 /** Consume a generator and return the final array values in order */
-export function drainSteps(
-  gen: Generator<unknown>,
-  arr: ArrayEntry[]
-): number[] {
+export function drainSteps(gen: Generator<unknown>, arr: ArrayEntry[]): number[] {
   const a = arr.map((e) => ({ ...e }))
   for (const step of gen) {
     const s = step as { type: string; i?: number; j?: number; value?: number }

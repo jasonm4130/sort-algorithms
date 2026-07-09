@@ -41,7 +41,7 @@ function makeEntries(size: number): ArrayEntry[] {
 }
 
 function entriesToBars(entries: ArrayEntry[]): BarState[] {
-  return entries.map(entry => ({ entry, status: 'default' }))
+  return entries.map((entry) => ({ entry, status: 'default' }))
 }
 
 const GENERATORS: Record<string, (arr: ArrayEntry[]) => Generator<Step>> = {
@@ -76,7 +76,7 @@ const GENERATORS: Record<string, (arr: ArrayEntry[]) => Generator<Step>> = {
 }
 
 function applyStep(bars: BarState[], step: Step): BarState[] {
-  const next = bars.map(b => ({ ...b, status: 'default' as BarState['status'] }))
+  const next = bars.map((b) => ({ ...b, status: 'default' as BarState['status'] }))
 
   switch (step.type) {
     case 'compare':
@@ -103,12 +103,12 @@ function applyStep(bars: BarState[], step: Step): BarState[] {
       next[step.i] = { ...next[step.i], status: 'pivot' }
       break
     case 'mark-sorted':
-      step.indices.forEach(idx => {
+      step.indices.forEach((idx) => {
         next[idx] = { ...next[idx], status: 'sorted' }
       })
       break
     case 'done':
-      return next.map(b => ({ ...b, status: 'sorted' }))
+      return next.map((b) => ({ ...b, status: 'sorted' }))
   }
 
   return next
@@ -138,7 +138,7 @@ export interface AlgorithmPlayerActions {
 export function useAlgorithmPlayer(
   algorithmId: string,
   initialSize = 30,
-  onStep?: (step: Step, bars: BarState[]) => void,
+  onStep?: (step: Step, bars: BarState[]) => void
 ): AlgorithmPlayerState & AlgorithmPlayerActions {
   const [arraySize, setArraySizeState] = useState(initialSize)
   const [speed, setSpeedState] = useState(60) // steps per second × scale
@@ -162,19 +162,25 @@ export function useAlgorithmPlayer(
   const speedRef = useRef(speed)
   const statusRef = useRef(status)
   const onStepRef = useRef(onStep)
-  useEffect(() => { onStepRef.current = onStep }, [onStep])
+  useEffect(() => {
+    onStepRef.current = onStep
+  }, [onStep])
 
-  useEffect(() => { speedRef.current = speed }, [speed])
-  useEffect(() => { statusRef.current = status }, [status])
+  useEffect(() => {
+    speedRef.current = speed
+  }, [speed])
+  useEffect(() => {
+    statusRef.current = status
+  }, [status])
 
   // Build / rebuild the generator from current source entries
   const buildGenerator = useCallback(
     (entries: ArrayEntry[]) => {
       const genFn = GENERATORS[algorithmId]
       if (!genFn) return null
-      return genFn(entries.map(e => ({ ...e }))) // pass a copy
+      return genFn(entries.map((e) => ({ ...e }))) // pass a copy
     },
-    [algorithmId],
+    [algorithmId]
   )
 
   // Initialise source on mount and when algorithmId changes
@@ -210,13 +216,13 @@ export function useAlgorithmPlayer(
     // Fire sound callback with pre-step snapshot (synchronous, before React batches the update)
     onStepRef.current?.(step, barsRef.current)
 
-    setBars(prev => {
+    setBars((prev) => {
       const next = applyStep(prev, step)
       barsRef.current = next
       historyRef.current.push(next)
       return next
     })
-    setStepIndex(i => i + 1)
+    setStepIndex((i) => i + 1)
 
     if (step.type === 'done') {
       setStatus('done')
@@ -261,7 +267,7 @@ export function useAlgorithmPlayer(
   // biome-ignore lint/correctness/useExhaustiveDependencies: stopInterval closes over refs and is stable in behavior though not memoized
   const pause = useCallback(() => {
     stopInterval()
-    setStatus(prev => (prev === 'playing' ? 'paused' : prev))
+    setStatus((prev) => (prev === 'playing' ? 'paused' : prev))
   }, [])
 
   // biome-ignore lint/correctness/useExhaustiveDependencies: stopInterval closes over refs and is stable in behavior though not memoized
@@ -305,11 +311,11 @@ export function useAlgorithmPlayer(
     const prev = historyRef.current.at(-1)!
     barsRef.current = prev
     setBars(prev)
-    setStepIndex(i => Math.max(0, i - 1))
+    setStepIndex((i) => Math.max(0, i - 1))
     setStatus('paused')
     // Rebuild generator from source up to current position is expensive;
     // instead reset so forward play still works from the rewound state.
-    const entries = sourceRef.current.map(e => ({ ...e }))
+    const entries = sourceRef.current.map((e) => ({ ...e }))
     // Replay steps up to (historyRef length - 1) to resync generator
     const gen = buildGenerator(entries)
     if (gen) {
@@ -341,7 +347,7 @@ export function useAlgorithmPlayer(
       setStatus('idle')
       generatorRef.current = buildGenerator(entries)
     },
-    [buildGenerator],
+    [buildGenerator]
   )
 
   return {

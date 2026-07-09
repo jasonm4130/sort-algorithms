@@ -28,7 +28,7 @@ export default function Visualizer() {
       navigate(`/algorithm/${newId}`)
       setMobileMenuOpen(false)
     },
-    [navigate],
+    [navigate]
   )
 
   return (

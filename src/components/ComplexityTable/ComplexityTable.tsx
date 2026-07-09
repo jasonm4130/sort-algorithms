@@ -66,4 +66,3 @@ export function ComplexityTable({ algorithm }: ComplexityTableProps) {
     </div>
   )
 }
-

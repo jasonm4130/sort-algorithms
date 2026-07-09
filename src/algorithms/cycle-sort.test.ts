@@ -30,7 +30,10 @@ describe('Cycle Sort', () => {
     it('minimises writes — only overwrites when necessary', () => {
       // Two-element unsorted: exactly one cycle → two writes
       const writes: number[] = []
-      const arr = [{ id: '1', value: 2 }, { id: '2', value: 1 }]
+      const arr = [
+        { id: '1', value: 2 },
+        { id: '2', value: 1 },
+      ]
       for (const step of cycleSortSteps(arr)) {
         if (step.type === 'overwrite') writes.push(step.i)
       }
@@ -40,20 +43,31 @@ describe('Cycle Sort', () => {
 
   describe('cycleSortSteps generator', () => {
     it('final step is done', () => {
-      const arr = [{ id: '1', value: 3 }, { id: '2', value: 1 }, { id: '3', value: 2 }]
+      const arr = [
+        { id: '1', value: 3 },
+        { id: '2', value: 1 },
+        { id: '3', value: 2 },
+      ]
       const steps = [...cycleSortSteps(arr)]
       expect(steps.at(-1)).toEqual({ type: 'done' })
     })
 
     it('does not mutate original input', () => {
-      const arr = [{ id: '1', value: 3 }, { id: '2', value: 1 }]
+      const arr = [
+        { id: '1', value: 3 },
+        { id: '2', value: 1 },
+      ]
       const original = JSON.stringify(arr)
       void [...cycleSortSteps(arr)]
       expect(JSON.stringify(arr)).toBe(original)
     })
 
     it('uses overwrite steps (not swap) — minimum-write property', () => {
-      const arr = [{ id: '1', value: 3 }, { id: '2', value: 1 }, { id: '3', value: 2 }]
+      const arr = [
+        { id: '1', value: 3 },
+        { id: '2', value: 1 },
+        { id: '3', value: 2 },
+      ]
       const steps = [...cycleSortSteps(arr)]
       expect(steps.some((s) => s.type === 'overwrite')).toBe(true)
       expect(steps.some((s) => s.type === 'swap')).toBe(false)
