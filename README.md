@@ -55,7 +55,7 @@ npm run pages:dev    # Local Cloudflare Pages simulation via wrangler
 | `npm run dev` | Vite dev server |
 | `npm run build` | Production build → `dist/` |
 | `npm run typecheck` | TypeScript check (no emit) |
-| `npm run lint` | ESLint (0 warnings allowed) |
+| `npm run lint` | Biome check (lint + format, zero tolerance) |
 | `npm run test` | Vitest watch mode |
 | `npm run test:run` | Vitest single pass |
 | `npm run ci` | typecheck + lint + test:run + build |
@@ -107,7 +107,7 @@ A new sorting algorithm needs four things:
 ### Code style
 
 - TypeScript strict mode — no `any`, no unused variables
-- ESLint + Prettier — run `npm run lint` to check
+- Biome (lint + format) — run `npm run lint` to check, `npm run lint:fix` to fix
 - Algorithm generators must be **pure** — no mutation of input, no global state, no React imports
 
 ## License

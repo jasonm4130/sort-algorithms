@@ -9,7 +9,7 @@ A Cloudflare Pages static site visualizing sorting algorithms, deployed via nati
 - Animation: `motion` v12+ (`motion/react`)
 - Testing: Vitest 4 (unit) + Playwright (E2E)
 - Deploy: Cloudflare Pages native Git integration — build command `npm run build`, output `dist`
-- Linting: ESLint 9 flat config + Prettier 3
+- Linting/formatting: Biome 2
 
 ## Commands
 ```bash
@@ -18,7 +18,7 @@ npm run build         # tsc -b && vite build → dist/
 npm run typecheck     # TypeScript check only (no emit)
 npm run test          # Vitest watch mode
 npm run test:run      # Vitest single pass (use in CI)
-npm run lint          # ESLint (0 warnings allowed)
+npm run lint          # Biome check (lint + format)
 npm run ci            # typecheck + lint + test:run + build
 npm run pages:dev     # wrangler pages dev (local Cloudflare sim)
 ```
