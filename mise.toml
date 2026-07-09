@@ -1,0 +1,3 @@
+# Node pin — keep in sync with .node-version (Cloudflare Workers Builds reads that file)
+[tools]
+node = "24.15.0"

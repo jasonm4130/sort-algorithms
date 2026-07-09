@@ -2,11 +2,7 @@ import type { ArrayEntry, Step } from '../types/index.ts'
 
 const MIN_MERGE = 32
 
-function* insertionRunSteps(
-  a: ArrayEntry[],
-  left: number,
-  right: number
-): Generator<Step> {
+function* insertionRunSteps(a: ArrayEntry[], left: number, right: number): Generator<Step> {
   for (let i = left + 1; i <= right; i++) {
     let j = i
     while (j > left) {
@@ -100,7 +96,9 @@ export function timSort(arr: number[]): number[] {
       if (mid >= right) continue
       const L = a.slice(left, mid + 1)
       const R = a.slice(mid + 1, right + 1)
-      let l = 0, r = 0, k = left
+      let l = 0,
+        r = 0,
+        k = left
       while (l < L.length && r < R.length) a[k++] = L[l] <= R[r] ? L[l++] : R[r++]
       while (l < L.length) a[k++] = L[l++]
       while (r < R.length) a[k++] = R[r++]

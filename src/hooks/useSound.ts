@@ -4,7 +4,7 @@ import type { BarState, Step } from '../types/index.ts'
 // Map a bar value (5–100) to Hz using an exponential scale (≈ two octaves)
 function valueToFreq(value: number): number {
   const t = (Math.max(5, Math.min(100, value)) - 5) / 95
-  return 180 * Math.pow(2000 / 180, t)
+  return 180 * (2000 / 180) ** t
 }
 
 function beep(
@@ -13,7 +13,7 @@ function beep(
   duration: number,
   type: OscillatorType,
   peakGain: number,
-  delaySeconds = 0,
+  delaySeconds = 0
 ): void {
   const osc = ctx.createOscillator()
   const gain = ctx.createGain()
@@ -30,7 +30,7 @@ function beep(
 
 export function useSound() {
   const [soundEnabled, setSoundEnabled] = useState<boolean>(
-    () => localStorage.getItem('sortSound') !== 'off',
+    () => localStorage.getItem('sortSound') !== 'off'
   )
 
   const ctxRef = useRef<AudioContext | null>(null)
@@ -46,6 +46,7 @@ export function useSound() {
     return ctxRef.current
   }
 
+  // biome-ignore lint/correctness/useExhaustiveDependencies: getCtx closes over a ref and is stable in behavior though not memoized; soundEnabled is the only reactive dep
   const playStep = useCallback(
     (step: Step, bars: BarState[]): void => {
       if (!soundEnabled) return
@@ -87,7 +88,7 @@ export function useSound() {
       }
     },
     // getCtx is stable (uses a ref internally), soundEnabled is the only reactive dep
-    [soundEnabled],
+    [soundEnabled]
   )
 
   const toggleSound = useCallback(() => {

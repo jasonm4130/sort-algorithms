@@ -16,10 +16,7 @@ export function* bucketSortSteps(arr: ArrayEntry[]): Generator<Step> {
 
   // Distribute into buckets
   for (const entry of a) {
-    const idx = Math.min(
-      Math.floor(((entry.value - min) / range) * bucketCount),
-      bucketCount - 1
-    )
+    const idx = Math.min(Math.floor(((entry.value - min) / range) * bucketCount), bucketCount - 1)
     buckets[idx].push({ ...entry })
   }
 

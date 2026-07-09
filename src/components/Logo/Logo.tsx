@@ -14,10 +14,10 @@ export function Logo({ className }: LogoProps) {
         aria-hidden="true"
         focusable="false"
       >
-        <rect x="1"  y="22" width="6" height="8"  rx="1.5" fill="var(--color-accent)"/>
-        <rect x="9"  y="16" width="6" height="14" rx="1.5" fill="var(--color-accent)"/>
-        <rect x="17" y="10" width="6" height="20" rx="1.5" fill="var(--color-accent)"/>
-        <rect x="25" y="2"  width="6" height="28" rx="1.5" fill="var(--color-accent)"/>
+        <rect x="1" y="22" width="6" height="8" rx="1.5" fill="var(--color-accent)" />
+        <rect x="9" y="16" width="6" height="14" rx="1.5" fill="var(--color-accent)" />
+        <rect x="17" y="10" width="6" height="20" rx="1.5" fill="var(--color-accent)" />
+        <rect x="25" y="2" width="6" height="28" rx="1.5" fill="var(--color-accent)" />
       </svg>
       <span className="font-semibold tracking-tight">Sort Algorithms</span>
     </span>

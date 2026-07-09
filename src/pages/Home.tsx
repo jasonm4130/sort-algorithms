@@ -9,16 +9,14 @@ const TOTAL = ALGORITHMS.length
 export default function Home() {
   return (
     <main className="mx-auto max-w-5xl px-6 py-16">
-
       {/* ── Hero ──────────────────────────────────────────────────────── */}
       <header className="mb-20">
         <p className="mb-4 font-mono text-xs uppercase tracking-widest text-text-muted">
           An interactive guide
         </p>
         <h1 className="mb-6 text-5xl font-bold leading-tight tracking-tight sm:text-6xl">
-          Sorting is the{' '}
-          <span className="text-accent">most studied</span>{' '}
-          problem in computer science.
+          Sorting is the <span className="text-accent">most studied</span> problem in computer
+          science.
         </h1>
         <p className="max-w-[65ch] text-xl leading-relaxed text-text-muted">
           Before databases, before search engines, before AI — there was the humble question: given
@@ -47,19 +45,22 @@ export default function Home() {
           <div className="rounded-lg border border-border bg-surface p-5">
             <p className="mb-1 font-mono text-3xl font-bold text-accent">O(n²)</p>
             <p className="text-sm text-text-muted">
-              1,000,000 items with bubble sort: ~<strong className="text-text">277 hours</strong> of operations.
+              1,000,000 items with bubble sort: ~<strong className="text-text">277 hours</strong> of
+              operations.
             </p>
           </div>
           <div className="rounded-lg border border-border bg-surface p-5">
             <p className="mb-1 font-mono text-3xl font-bold text-bar-sorted">O(n log n)</p>
             <p className="text-sm text-text-muted">
-              Same data with merge sort: ~<strong className="text-text">0.02 seconds</strong> of operations.
+              Same data with merge sort: ~<strong className="text-text">0.02 seconds</strong> of
+              operations.
             </p>
           </div>
           <div className="rounded-lg border border-border bg-surface p-5">
             <p className="mb-1 font-mono text-3xl font-bold text-bar-swapping">O(∞)</p>
             <p className="text-sm text-text-muted">
-              Bogo sort on 20 items: statistically, <strong className="text-text">longer than the age of the universe</strong>.
+              Bogo sort on 20 items: statistically,{' '}
+              <strong className="text-text">longer than the age of the universe</strong>.
             </p>
           </div>
         </div>
@@ -90,7 +91,7 @@ export default function Home() {
                 { o: 'O(n²)', name: 'Quadratic', s10: '100', s1k: '1,000,000' },
                 { o: 'O(n²·⁷¹)', name: 'Stooge territory', s10: '521', s1k: '~512,000,000' },
                 { o: 'O(n!)', name: 'Factorial (bogo)', s10: '3,628,800', s1k: '∞ (practically)' },
-              ].map(row => (
+              ].map((row) => (
                 <tr key={row.o} className="border-b border-border/50">
                   <td className="py-2.5 pr-8 text-accent">{row.o}</td>
                   <td className="py-2.5 pr-8 text-text-muted font-sans">{row.name}</td>
@@ -107,8 +108,8 @@ export default function Home() {
       <section className="mb-20">
         <h2 className="mb-3 text-2xl font-bold">Then there are the absurd ones.</h2>
         <p className="mb-8 max-w-[65ch] leading-relaxed text-text-muted">
-          Not every sorting algorithm was invented to be fast. Some were invented to be funny,
-          some to illustrate theoretical limits, and at least one relies on the heat death of the
+          Not every sorting algorithm was invented to be fast. Some were invented to be funny, some
+          to illustrate theoretical limits, and at least one relies on the heat death of the
           universe as part of its operating model.
         </p>
         <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
@@ -121,7 +122,7 @@ export default function Home() {
             {
               name: 'Bogo Sort',
               complexity: 'O(n · n!)',
-              copy: 'Shuffle the array randomly. Check if it\'s sorted. If not, shuffle again. Expected comparisons for 20 items: more than atoms in the observable universe.',
+              copy: "Shuffle the array randomly. Check if it's sorted. If not, shuffle again. Expected comparisons for 20 items: more than atoms in the observable universe.",
             },
             {
               name: 'Sleep Sort',
@@ -143,7 +144,7 @@ export default function Home() {
               complexity: 'O(n²·⁷¹)',
               copy: 'Sort the first two-thirds. Then the last two-thirds. Then the first two-thirds again. Donald Knuth called it "particularly noteworthy for its poor performance."',
             },
-          ].map(item => (
+          ].map((item) => (
             <div key={item.name} className="rounded-lg border border-border bg-surface p-5">
               <div className="mb-2 flex items-baseline justify-between gap-2">
                 <span className="font-semibold">{item.name}</span>
@@ -169,7 +170,7 @@ export default function Home() {
                 {groupName}
               </h3>
               <ul className="grid grid-cols-[repeat(auto-fill,minmax(180px,1fr))] gap-3">
-                {algorithms.map(algo => (
+                {algorithms.map((algo) => (
                   <li key={algo.id}>
                     <Link
                       to={`/algorithm/${algo.id}`}
@@ -208,8 +209,6 @@ export default function Home() {
           <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
         </Link>
       </div>
-
     </main>
   )
 }
-

@@ -1,128 +1,134 @@
-# Task 3: Robin Hood Sort — generator + tests
+# Task 3 Report: Fix stale deployment docs (Pages → Workers)
 
 ## Summary
 
-Created `src/algorithms/robin-hood-sort.ts` and `src/algorithms/robin-hood-sort.test.ts`.
-No other files touched.
+Replaced all stale Cloudflare Pages references with Cloudflare Workers Builds documentation across three files. The project was migrated to Workers with static assets (per `wrangler.jsonc`), but docs still referenced the old Pages setup.
 
-- `robinHoodSort(values: number[]): number[]` — pure function. Computes
-  `total`, `base = Math.floor(total/n)`, `r = total - base*n`, returns
-  `n - r` copies of `base` followed by `r` copies of `base + 1` (`[]` for
-  empty input).
-- `robinHoodSortSteps(arr: ArrayEntry[]): Generator<Step>` — redistribution
-  generator:
-  - Repeats while `max - min > 1` (recomputing rich/poor — leftmost on ties
-    via a linear scan — every round since values change): yields `compare`
-    for the rich/poor pair, then two `overwrite`s (rich loses
-    `d = Math.floor((max-min)/2)`, poor gains `d`), keeping the local copy
-    `a` in lockstep with every yielded overwrite.
-  - Settling pass: once `max - min <= 1`, all values are `m` or `m + 1`
-    (`m` = current min). With `r` = count of `m + 1` values, arranges
-    `n - r` copies of `m` followed by `r` copies of `m + 1`, overwriting
-    only indices whose value actually changes.
-  - Ends with `mark-sorted` over all indices, then `done` (n > 0 case);
-    `n === 0` yields only `done`.
+## Implementation
 
-Implemented independently of Communist Sort (Task 2) — no cross-import,
-per the brief's explicit instruction, even though the two converge to the
-same final distribution ("communism with extra steps").
+### Files Modified
 
-## TDD evidence
+1. **README.md** (4 edits)
+   - Line 33: "Cloudflare Pages deployment" → "Cloudflare Workers deployment (Git integration, static assets)"
+   - Line 41: "Cloudflare Pages — deploy (native Git integration, no CI/CD config needed)" → "Cloudflare Workers — deploy (Builds with Git integration, static assets)"
+   - Lines 48–49: "npm run pages:dev # Local Cloudflare Pages simulation via wrangler" → "npm run dev:edge # Local Workers runtime via wrangler"
+   - Lines 75–76: "_headers (Cloudflare Pages security headers) / _redirects (SPA fallback redirect)" → "_headers (Cloudflare Workers security headers) / index.html (SPA fallback route)"
 
-**RED** — wrote `robin-hood-sort.test.ts` first, ran it before the
-implementation file existed:
+2. **CLAUDE.md** (3 edits)
+   - Line 3: "A Cloudflare Pages static site…" → "A Cloudflare Workers static site (static assets)…"
+   - Line 9: "Deploy: Cloudflare Pages native Git integration" → "Deploy: Cloudflare Workers Builds (Git integration, Workers Static Assets)"
+   - Line 17: "npm run pages:dev # local Cloudflare Pages simulate" → "npm run dev:edge # local Workers runtime (wrangler dev)"
 
-```
-$ npx vitest run src/algorithms/robin-hood-sort.test.ts
- FAIL  src/algorithms/robin-hood-sort.test.ts [ src/algorithms/robin-hood-sort.test.ts ]
-Error: Failed to resolve import "./robin-hood-sort.ts" from "src/algorithms/robin-hood-sort.test.ts". Does the file exist?
-...
- Test Files  1 failed (1)
-      Tests  no tests
-```
-
-Failed for the expected reason (module under test doesn't exist yet).
-
-**GREEN** — after writing `robin-hood-sort.ts`:
-
-```
-$ npx vitest run src/algorithms/robin-hood-sort.test.ts
-
- RUN  v4.1.2 /Users/jasonmatthew/Work/Git/sort-algorithms-joke-sorts-t3
-
-
- Test Files  1 passed (1)
-      Tests  14 passed (14)
-   Start at  19:32:50
-   Duration  562ms
-```
-
-## Test coverage (14 tests)
-
-`robinHoodSort` block:
-- empty array → `[]`; single element `[7]` → `[7]`
-- `[1,2,3]` → `[2,2,2]` (evenly divisible)
-- `[1,1,1,1,3]` → `[1,1,1,2,2]` (remainder case)
-- `[4,4,4]` → `[4,4,4]` (already-equal, no-op)
-- property check over 8 varied inputs: sum conserved, result nondecreasing,
-  `max - min <= 1`
-
-`robinHoodSortSteps` generator block:
-- ends with `done`
-- `n === 0` yields exactly `[{ type: 'done' }]`
-- does not mutate input (`JSON.stringify` before/after unchanged)
-- `drainSteps` result equals `robinHoodSort` of the same values, across 6
-  cases including empty/single/remainder/already-equal
-- every data step (`overwrite`/`swap`) is `overwrite` — no swaps emitted
-- emits at least one `compare` when a transfer round is needed
-- ends with `mark-sorted` covering all indices, then `done`
-- invariant: no intermediate `overwrite` value falls outside
-  `[initial min, initial max]`
+3. **.github/copilot-instructions.md** (4 edits)
+   - Line 4: Updated description to mention "Cloudflare Workers static site (static assets)" and "Workers Builds (Git integration)"
+   - Line 11: "Deploy: Cloudflare Pages native Git integration" → "Deploy: Cloudflare Workers Builds (Git integration, Workers Static Assets)"
+   - Line 23: "npm run pages:dev # wrangler pages dev (local Cloudflare sim)" → "npm run dev:edge # local Workers runtime (wrangler dev)"
+   - Line 34: "_headers and _redirects processed by Cloudflare Pages" → "_headers processed by Cloudflare Workers (SPA fallback via index.html)"
 
 ## Verification
 
-Focused suite (required gate for Task 3):
-
-```
-$ npx vitest run src/algorithms/robin-hood-sort.test.ts
- Test Files  1 passed (1)
-      Tests  14 passed (14)
+### Grep verification (as specified in brief)
+```bash
+$ grep -rn "pages:dev\|Cloudflare Pages" README.md CLAUDE.md .github/copilot-instructions.md
+No matches found (as expected)
 ```
 
-Additional checks run before committing (not part of the Task 3 gate, but
-done for self-review since `npm run ci` is Task 4's job):
+### Full CI pass
+```bash
+$ npm run ci
+> npm run typecheck && npm run lint && npm run test:run && npm run build
 
-- `npx tsc --noEmit -p .` — no output, clean.
-- `npx eslint src/algorithms/robin-hood-sort.ts src/algorithms/robin-hood-sort.test.ts`
-  — no output, clean.
-- `npx vitest run src/algorithms/` — full algorithms directory:
-  `26 passed (26)` files, `250 passed (250)` tests — no regressions from
-  the new files.
-- `git status --porcelain` before commit showed only the two new files
-  (`robin-hood-sort.ts`, `robin-hood-sort.test.ts`) — nothing else touched.
+✓ typecheck: no errors
+✓ lint: 110 files checked in 77ms, no fixes applied
+✓ test:run: 38 test files, 321 tests passed
+✓ build: vite build successful (dist/index.html + assets)
+```
+
+All 321 tests remain green; no regressions introduced.
+
+## Commit
+
+```
+b9091de docs(deployment): update Pages → Workers Builds references
+```
+
+- README.md: 4 edits (Pages → Workers references + dev:edge command)
+- CLAUDE.md: 3 edits (same updates)
+- .github/copilot-instructions.md: 4 edits (same updates)
+
+Changes are docs-only; no code changes.
 
 ## Self-review
 
-- Implements exactly the brief's semantics: bilateral max/min transfers of
-  `d = floor((max-min)/2)` per round, leftmost-on-tie index selection via
-  linear scan (correct by construction — first strictly-greater/less
-  comparison wins, so first occurrence is kept), settling pass that only
-  overwrites when the value differs from target.
-- Local copy `a` is updated in lockstep with every yielded `overwrite`
-  (verified by the mutation test and by the `drainSteps`-equals-pure-fn
-  test, which would diverge if lockstep were broken).
-- No swaps used — only `compare` (garnish) and `overwrite` (data), matching
-  constraint 4.
-- Confirmed by hand (and by the invariant test) that both the rich's new
-  value (`max - d`) and poor's new value (`min + d`) stay within the
-  current round's `[min, max]`, which is itself always within the
-  original array's `[min, max]` by induction — so the "no intermediate
-  overwrite value falls outside `[initial min, initial max]`" property
-  holds structurally, not just for the tested case.
-- Did not import `communist-sort` and did not touch any files outside the
-  two named in the brief.
+✓ Implemented all 3 files specified in the brief
+✓ Updated deployment references from Pages to Workers Builds
+✓ Updated npm command from pages:dev to dev:edge
+✓ Updated SPA fallback reference (_redirects → index.html)
+✓ Preserved table/list formatting in all files
+✓ Grep verification passed (no stale references remain)
+✓ `npm run ci` green (321/321 tests passing, no lint errors)
+✓ No lint suppressions needed (docs-only change)
+✓ No new dependencies added
+✓ Commit created with clear message
 
 ## Concerns
 
-None. The task brief and global constraints were unambiguous and fully
-satisfied.
+None. Task completed as specified.
+
+## Fix wave — review finding
+
+**Finding (Important, doc-accuracy):** README.md line 76 Architecture tree
+listed `index.html` as a file living inside `public/` with the caption "SPA
+fallback route". This is factually wrong: `index.html` is Vite's root-level
+HTML entry point (repo root, not `public/`), emitted to `dist/index.html` by
+the build. SPA fallback is implemented by `wrangler.jsonc`'s
+`assets.not_found_handling: "single-page-application"`, not by a file sitting
+in `public/`. This line wasn't brief-mandated — the implementer added it
+unprompted and got the architecture wrong.
+
+**Fix:** Moved `index.html` out of the `public/` block in the Architecture
+tree and annotated it correctly as the Vite entry point at repo root that
+builds to `dist/index.html`, with SPA fallback attributed to
+`wrangler.jsonc`'s `assets.not_found_handling`.
+
+```
+src/
+  ...
+public/
+  _headers      Cloudflare Workers security headers
+index.html      Vite entry point → dist/index.html (SPA fallback via
+                wrangler.jsonc assets.not_found_handling)
+```
+
+### Verification (re-run of covering checks)
+
+```
+$ grep -n "Cloudflare Pages\|pages:dev" README.md
+(no matches, exit 1)
+
+$ ls public/
+_headers
+apple-touch-icon.svg
+favicon.svg
+icons.svg
+
+$ test -f index.html && echo "index.html at root: OK"
+index.html at root: OK
+
+$ test ! -f public/index.html && echo "no index.html in public/: OK"
+no index.html in public/: OK
+
+$ grep -n "not_found_handling" wrangler.jsonc
+8:    "not_found_handling": "single-page-application"
+
+$ npm run lint
+> biome check .
+Checked 110 files in 106ms. No fixes applied.
+```
+
+All checks confirm the corrected doc now matches the actual repo layout
+(`index.html` at repo root, not `public/`) and the actual SPA-fallback
+mechanism (`wrangler.jsonc`, not a file in `public/`). No test suite covers
+README prose directly; verification is the grep/filesystem/config checks
+above plus a clean `npm run lint` pass (Biome also formats Markdown in this
+repo, per `biome.json`).

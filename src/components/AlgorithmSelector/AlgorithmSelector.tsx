@@ -15,14 +15,15 @@ export function AlgorithmSelector({ selectedId, onSelect }: AlgorithmSelectorPro
             {groupName}
           </h3>
           <ul>
-            {algorithms.map(algo => (
+            {algorithms.map((algo) => (
               <li key={algo.id}>
                 <button
+                  type="button"
                   className={cn(
                     'w-full rounded-md px-3 py-1.5 text-left text-sm transition-colors',
                     selectedId === algo.id
                       ? 'bg-surface-raised font-semibold text-accent'
-                      : 'text-text hover:bg-surface-raised',
+                      : 'text-text hover:bg-surface-raised'
                   )}
                   onClick={() => onSelect(algo.id)}
                   aria-current={selectedId === algo.id ? 'page' : undefined}
@@ -37,4 +38,3 @@ export function AlgorithmSelector({ selectedId, onSelect }: AlgorithmSelectorPro
     </nav>
   )
 }
-

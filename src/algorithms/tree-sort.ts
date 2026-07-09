@@ -12,7 +12,7 @@ import type { ArrayEntry, Step } from '../types/index.ts'
 
 interface BSTNode {
   entry: ArrayEntry
-  origIdx: number          // index in the flat array — used for compare steps
+  origIdx: number // index in the flat array — used for compare steps
   left: BSTNode | null
   right: BSTNode | null
 }
@@ -21,7 +21,7 @@ function bstInsert(
   root: BSTNode | null,
   entry: ArrayEntry,
   origIdx: number,
-  compareSteps: Array<{ type: 'compare'; i: number; j: number }>,
+  compareSteps: Array<{ type: 'compare'; i: number; j: number }>
 ): BSTNode {
   const newNode: BSTNode = { entry, origIdx, left: null, right: null }
   if (root === null) return newNode
@@ -30,10 +30,16 @@ function bstInsert(
   for (;;) {
     compareSteps.push({ type: 'compare', i: origIdx, j: cur.origIdx })
     if (entry.value <= cur.entry.value) {
-      if (cur.left === null) { cur.left = newNode; return root }
+      if (cur.left === null) {
+        cur.left = newNode
+        return root
+      }
       cur = cur.left
     } else {
-      if (cur.right === null) { cur.right = newNode; return root }
+      if (cur.right === null) {
+        cur.right = newNode
+        return root
+      }
       cur = cur.right
     }
   }
@@ -82,7 +88,11 @@ export function* treeSortSteps(arr: ArrayEntry[]): Generator<Step> {
 export function treeSort(arr: number[]): number[] {
   if (arr.length <= 1) return [...arr]
 
-  interface Node { val: number; left: Node | null; right: Node | null }
+  interface Node {
+    val: number
+    left: Node | null
+    right: Node | null
+  }
 
   function insert(root: Node | null, val: number): Node {
     const node: Node = { val, left: null, right: null }
@@ -90,10 +100,16 @@ export function treeSort(arr: number[]): number[] {
     let cur = root
     for (;;) {
       if (val <= cur.val) {
-        if (cur.left === null) { cur.left = node; return root }
+        if (cur.left === null) {
+          cur.left = node
+          return root
+        }
         cur = cur.left
       } else {
-        if (cur.right === null) { cur.right = node; return root }
+        if (cur.right === null) {
+          cur.right = node
+          return root
+        }
         cur = cur.right
       }
     }

@@ -94,7 +94,7 @@ export const ALGORITHMS = [
     spaceComplexity: 'O(1)',
     stable: false,
     description:
-      "An optimised insertion sort that first compares distant elements. The decreasing gap sequence creates a visually interesting multi-pass pattern.",
+      'An optimised insertion sort that first compares distant elements. The decreasing gap sequence creates a visually interesting multi-pass pattern.',
   },
   {
     id: 'tim-sort',
@@ -280,7 +280,7 @@ export const ALGORITHMS = [
     spaceComplexity: 'O(1)',
     stable: false,
     description:
-      'Trickle-up economics: repeatedly takes the poorest bar\'s entire value and gives it to the richest, until one bar owns everything and the rest flatline at zero. The tycoon then rises to the top — technically sorted.',
+      "Trickle-up economics: repeatedly takes the poorest bar's entire value and gives it to the richest, until one bar owns everything and the rest flatline at zero. The tycoon then rises to the top — technically sorted.",
   },
   {
     id: 'robin-hood-sort',
@@ -294,7 +294,7 @@ export const ALGORITHMS = [
   },
 ] satisfies AlgorithmMeta[]
 
-export type AlgorithmId = typeof ALGORITHMS[number]['id']
+export type AlgorithmId = (typeof ALGORITHMS)[number]['id']
 
 export const ALGORITHM_MAP = new Map(ALGORITHMS.map((a) => [a.id, a]))
 
@@ -302,6 +302,6 @@ export const ALGORITHM_GROUPS: Record<string, AlgorithmMeta[]> = {
   'Simple O(n²)': ALGORITHMS.filter((a) => a.group === 'quadratic'),
   'Efficient O(n log n)': ALGORITHMS.filter((a) => a.group === 'efficient'),
   'Hybrid / Adaptive': ALGORITHMS.filter((a) => a.group === 'hybrid'),
-  'Distribution': ALGORITHMS.filter((a) => a.group === 'distribution'),
-  'Novelty': ALGORITHMS.filter((a) => a.group === 'novelty'),
+  Distribution: ALGORITHMS.filter((a) => a.group === 'distribution'),
+  Novelty: ALGORITHMS.filter((a) => a.group === 'novelty'),
 }

@@ -8,7 +8,7 @@ describe('Logo', () => {
     render(
       <MotionConfig reducedMotion="always">
         <Logo />
-      </MotionConfig>,
+      </MotionConfig>
     )
     expect(screen.getByText('Sort Algorithms')).toBeInTheDocument()
   })
@@ -17,7 +17,7 @@ describe('Logo', () => {
     const { container } = render(
       <MotionConfig reducedMotion="always">
         <Logo />
-      </MotionConfig>,
+      </MotionConfig>
     )
     const svg = container.querySelector('svg')
     expect(svg).toBeInTheDocument()
@@ -28,7 +28,7 @@ describe('Logo', () => {
     const { container } = render(
       <MotionConfig reducedMotion="always">
         <Logo className="custom-cls" />
-      </MotionConfig>,
+      </MotionConfig>
     )
     expect(container.firstChild).toHaveClass('custom-cls')
   })

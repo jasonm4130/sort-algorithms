@@ -7,7 +7,7 @@ interface SortBarsProps {
 }
 
 export function SortBars({ bars }: SortBarsProps) {
-  const maxValue = Math.max(...bars.map(b => b.entry.value), 1)
+  const maxValue = Math.max(...bars.map((b) => b.entry.value), 1)
 
   return (
     <MotionConfig reducedMotion="user">
@@ -24,12 +24,8 @@ export function SortBars({ bars }: SortBarsProps) {
             gap: 1,
           }}
         >
-          {bars.map(bar => (
-            <ArrayBar
-              key={bar.entry.id}
-              bar={bar}
-              maxValue={maxValue}
-            />
+          {bars.map((bar) => (
+            <ArrayBar key={bar.entry.id} bar={bar} maxValue={maxValue} />
           ))}
         </div>
       </LayoutGroup>

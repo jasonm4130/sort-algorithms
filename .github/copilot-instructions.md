@@ -1,15 +1,15 @@
 # sort-algorithms — Copilot Instructions
 
 ## Project
-A Cloudflare Pages static site visualizing sorting algorithms, deployed via native Cloudflare Git integration (no GitHub Actions needed). Built with React 19 + Vite 8 + TypeScript (strict mode).
+A Cloudflare Workers static site (static assets) visualizing sorting algorithms, deployed via Cloudflare Workers Builds (Git integration, no GitHub Actions needed). Built with React 19 + Vite 8 + TypeScript (strict mode).
 
 ## Stack
 - Runtime: Node 20, Vite 8, React 19
 - Language: TypeScript (strict mode, bundler moduleResolution)
 - Animation: `motion` v12+ (`motion/react`)
 - Testing: Vitest 4 (unit) + Playwright (E2E)
-- Deploy: Cloudflare Pages native Git integration — build command `npm run build`, output `dist`
-- Linting: ESLint 9 flat config + Prettier 3
+- Deploy: Cloudflare Workers Builds (Git integration, Workers Static Assets) — build command `npm run build`, output `dist`
+- Linting/formatting: Biome 2
 
 ## Commands
 ```bash
@@ -18,9 +18,9 @@ npm run build         # tsc -b && vite build → dist/
 npm run typecheck     # TypeScript check only (no emit)
 npm run test          # Vitest watch mode
 npm run test:run      # Vitest single pass (use in CI)
-npm run lint          # ESLint (0 warnings allowed)
+npm run lint          # Biome check (lint + format)
 npm run ci            # typecheck + lint + test:run + build
-npm run pages:dev     # wrangler pages dev (local Cloudflare sim)
+npm run dev:edge      # local Workers runtime (wrangler dev)
 ```
 
 ## Architecture
@@ -31,7 +31,7 @@ npm run pages:dev     # wrangler pages dev (local Cloudflare sim)
 - `src/types/` — Shared TypeScript types. Import from here, never redefine locally
 - `src/constants/` — Algorithm registry with Big-O metadata for the UI
 - `src/pages/` — Route-level components only (`Home`, `Visualizer`)
-- `public/` — Static assets; `_headers` and `_redirects` processed by Cloudflare Pages
+- `public/` — Static assets; `_headers` processed by Cloudflare Workers (SPA fallback via index.html)
 
 ## Key Conventions
 - Use **named exports** everywhere except page-level components (which use default exports)

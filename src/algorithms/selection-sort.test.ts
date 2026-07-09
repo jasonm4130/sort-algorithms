@@ -7,7 +7,8 @@ describe('Selection Sort', () => {
     it('handles empty array', () => expect(selectionSort([])).toEqual([]))
     it('handles single element', () => expect(selectionSort([1])).toEqual([1]))
     it('sorts already sorted', () => expect(selectionSort([1, 2, 3])).toEqual([1, 2, 3]))
-    it('sorts reverse sorted', () => expect(selectionSort([5, 4, 3, 2, 1])).toEqual([1, 2, 3, 4, 5]))
+    it('sorts reverse sorted', () =>
+      expect(selectionSort([5, 4, 3, 2, 1])).toEqual([1, 2, 3, 4, 5]))
     it('handles duplicates', () => expect(selectionSort([3, 1, 4, 1, 5])).toEqual([1, 1, 3, 4, 5]))
   })
 
@@ -31,7 +32,9 @@ describe('Selection Sort', () => {
 
     it('always performs n(n-1)/2 comparisons', () => {
       const arr = toEntries([1, 2, 3, 4, 5]) // already sorted
-      const comparisons = [...selectionSortSteps(arr)].filter((s) => (s as {type:string}).type === 'compare')
+      const comparisons = [...selectionSortSteps(arr)].filter(
+        (s) => (s as { type: string }).type === 'compare'
+      )
       expect(comparisons).toHaveLength(10) // always 5*4/2
     })
   })

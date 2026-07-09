@@ -30,26 +30,41 @@ describe('Tree Sort', () => {
 
   describe('treeSortSteps generator', () => {
     it('final step is done', () => {
-      const arr = [{ id: '1', value: 3 }, { id: '2', value: 1 }, { id: '3', value: 2 }]
+      const arr = [
+        { id: '1', value: 3 },
+        { id: '2', value: 1 },
+        { id: '3', value: 2 },
+      ]
       const steps = [...treeSortSteps(arr)]
       expect(steps.at(-1)).toEqual({ type: 'done' })
     })
 
     it('does not mutate original input', () => {
-      const arr = [{ id: '1', value: 3 }, { id: '2', value: 1 }]
+      const arr = [
+        { id: '1', value: 3 },
+        { id: '2', value: 1 },
+      ]
       const original = JSON.stringify(arr)
       void [...treeSortSteps(arr)]
       expect(JSON.stringify(arr)).toBe(original)
     })
 
     it('yields pivot steps during BST build phase', () => {
-      const arr = [{ id: '1', value: 3 }, { id: '2', value: 1 }, { id: '3', value: 2 }]
+      const arr = [
+        { id: '1', value: 3 },
+        { id: '2', value: 1 },
+        { id: '3', value: 2 },
+      ]
       const steps = [...treeSortSteps(arr)]
       expect(steps.some((s) => s.type === 'pivot')).toBe(true)
     })
 
     it('yields overwrite steps during readout phase', () => {
-      const arr = [{ id: '1', value: 3 }, { id: '2', value: 1 }, { id: '3', value: 2 }]
+      const arr = [
+        { id: '1', value: 3 },
+        { id: '2', value: 1 },
+        { id: '3', value: 2 },
+      ]
       const steps = [...treeSortSteps(arr)]
       expect(steps.some((s) => s.type === 'overwrite')).toBe(true)
     })

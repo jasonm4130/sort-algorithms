@@ -17,7 +17,7 @@
       Reads localStorage, falls back to OS preference, defaults to dark.
     -->
     <script>
-      ;(function () {
+      ;(() => {
         var t = localStorage.getItem('theme')
         if (t !== 'dark' && t !== 'light') {
           t = window.matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark'

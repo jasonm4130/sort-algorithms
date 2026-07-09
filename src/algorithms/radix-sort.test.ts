@@ -9,7 +9,9 @@ describe('Radix Sort', () => {
     it('sorts already sorted', () => expect(radixSort([1, 2, 3])).toEqual([1, 2, 3]))
     it('sorts reverse sorted', () => expect(radixSort([5, 4, 3, 2, 1])).toEqual([1, 2, 3, 4, 5]))
     it('handles multi-digit numbers', () =>
-      expect(radixSort([170, 45, 75, 90, 802, 24, 2, 66])).toEqual([2, 24, 45, 66, 75, 90, 170, 802]))
+      expect(radixSort([170, 45, 75, 90, 802, 24, 2, 66])).toEqual([
+        2, 24, 45, 66, 75, 90, 170, 802,
+      ]))
   })
 
   describe('radixSortSteps', () => {
