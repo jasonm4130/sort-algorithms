@@ -67,9 +67,5 @@
   },
   "optionalDependencies": {
     "@rolldown/binding-darwin-arm64": "^1.0.0-rc.12"
-  },
-  "volta": {
-    "node": "20.19.5",
-    "npm": "10.8.2"
   }
 }
