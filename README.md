@@ -30,7 +30,7 @@ Bogo Sort · Gnome Sort · Stooge Sort · Pancake Sort · Sleep Sort · Stalin S
 - Sound mode — hear the comparisons
 - Dark and light themes
 - Responsive layout with collapsible algorithm menu on mobile
-- Cloudflare Pages deployment (zero-config CI via Git integration)
+- Cloudflare Workers deployment (Git integration, static assets)
 
 ## Stack
 
@@ -38,14 +38,14 @@ Bogo Sort · Gnome Sort · Stooge Sort · Pancake Sort · Sleep Sort · Stalin S
 - **motion/react** v12 — all animations
 - **Tailwind CSS v4** + **shadcn/ui** — styling
 - **Vitest 4** — unit tests · **Playwright** — E2E
-- **Cloudflare Pages** — deploy (native Git integration, no CI/CD config needed)
+- **Cloudflare Workers** — deploy (Builds with Git integration, static assets)
 
 ## Local development
 
 ```bash
 npm install
 npm run dev          # Vite dev server → http://localhost:5173
-npm run pages:dev    # Local Cloudflare Pages simulation via wrangler
+npm run dev:edge    # Local Workers runtime via wrangler
 ```
 
 ## Commands
@@ -59,7 +59,7 @@ npm run pages:dev    # Local Cloudflare Pages simulation via wrangler
 | `npm run test` | Vitest watch mode |
 | `npm run test:run` | Vitest single pass |
 | `npm run ci` | typecheck + lint + test:run + build |
-| `npm run pages:dev` | Local Cloudflare Pages simulation |
+| `npm run dev:edge` | Local Workers runtime (wrangler dev) |
 
 ## Architecture
 
@@ -72,8 +72,8 @@ src/
   pages/        Route-level components (Home, Visualizer)
   types/        Shared TypeScript types
 public/
-  _headers      Cloudflare Pages security headers
-  _redirects    SPA fallback redirect
+  _headers      Cloudflare Workers security headers
+  index.html    SPA fallback route
 ```
 
 Each algorithm file exports two things:

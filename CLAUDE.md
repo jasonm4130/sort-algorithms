@@ -1,12 +1,12 @@
 # sort-algorithms
 
-A Cloudflare Pages static site that visualizes sorting algorithms with animated bar charts, step-by-step pseudocode, and Big-O complexity information.
+A Cloudflare Workers static site (static assets) that visualizes sorting algorithms with animated bar charts, step-by-step pseudocode, and Big-O complexity information.
 
 ## Stack
 - React 19 + Vite 8 + TypeScript (strict)
 - Animation: `motion/react` v12+
 - Testing: Vitest 4 (unit) + Playwright (E2E)
-- Deploy: Cloudflare Pages native Git integration
+- Deploy: Cloudflare Workers Builds (Git integration, Workers Static Assets)
 
 ## Key commands
 ```bash
@@ -14,7 +14,7 @@ npm run dev        # dev server
 npm run ci         # typecheck + lint + test + build
 npm run test:run   # unit tests (single pass)
 npm run test:e2e   # Playwright E2E
-npm run pages:dev  # local Cloudflare Pages simulate
+npm run dev:edge   # local Workers runtime (wrangler dev)
 ```
 
 ## Architecture rules
