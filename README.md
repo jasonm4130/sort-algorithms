@@ -45,7 +45,7 @@ Bogo Sort · Gnome Sort · Stooge Sort · Pancake Sort · Sleep Sort · Stalin S
 ```bash
 npm install
 npm run dev          # Vite dev server → http://localhost:5173
-npm run dev:edge    # Local Workers runtime via wrangler
+npm run dev:edge     # Local Workers runtime via wrangler
 ```
 
 ## Commands

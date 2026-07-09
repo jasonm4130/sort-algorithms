@@ -20,7 +20,7 @@ npm run test          # Vitest watch mode
 npm run test:run      # Vitest single pass (use in CI)
 npm run lint          # Biome check (lint + format)
 npm run ci            # typecheck + lint + test:run + build
-npm run dev:edge     # local Workers runtime (wrangler dev)
+npm run dev:edge      # local Workers runtime (wrangler dev)
 ```
 
 ## Architecture
