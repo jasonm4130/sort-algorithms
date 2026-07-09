@@ -17,6 +17,7 @@ export default function Visualizer() {
   const currentStepRef = useRef<Step | null>(null)
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
 
+  // biome-ignore lint/style/noNonNullAssertion: 'bubble-sort' is a registered algorithm id, always present in ALGORITHM_MAP
   const algo = ALGORITHM_MAP.get(id) ?? ALGORITHM_MAP.get('bubble-sort')!
 
   const { soundEnabled, toggleSound, playStep } = useSound()
@@ -36,6 +37,7 @@ export default function Visualizer() {
       <div className="hidden max-md:flex items-center justify-between border-b border-border bg-surface px-4 py-2.5">
         <span className="text-sm font-semibold text-text">{algo.name}</span>
         <button
+          type="button"
           className="rounded-md p-1.5 text-text-muted transition-colors hover:bg-surface-raised hover:text-text"
           onClick={() => setMobileMenuOpen((o) => !o)}
           aria-label={mobileMenuOpen ? 'Close algorithm menu' : 'Open algorithm menu'}
@@ -62,6 +64,7 @@ export default function Visualizer() {
           <h1 className="text-2xl font-bold">{algo.name}</h1>
         </header>
 
+        {/* biome-ignore lint/a11y/useAriaPropsSupportedByRole: role="generic" (default for div) doesn't formally support aria-label per spec, but this is a static labeled region, not interactive content */}
         <div
           className="min-h-[300px] max-h-[420px] flex-1 overflow-hidden rounded-lg border border-border bg-surface p-3 pb-0"
           aria-label="Sorting visualization"

@@ -26,5 +26,5 @@ function Badge({ className, variant, ...props }: BadgeProps) {
   return <div className={cn(badgeVariants({ variant }), className)} {...props} />
 }
 
-// eslint-disable-next-line react-refresh/only-export-components
+// biome-ignore lint/style/useComponentExportOnlyModules: badgeVariants (cva factory) is shared alongside the component, matching shadcn/ui convention
 export { Badge, badgeVariants }

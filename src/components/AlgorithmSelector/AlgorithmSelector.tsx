@@ -18,6 +18,7 @@ export function AlgorithmSelector({ selectedId, onSelect }: AlgorithmSelectorPro
             {algorithms.map(algo => (
               <li key={algo.id}>
                 <button
+                  type="button"
                   className={cn(
                     'w-full rounded-md px-3 py-1.5 text-left text-sm transition-colors',
                     selectedId === algo.id

@@ -178,6 +178,7 @@ export function useAlgorithmPlayer(
   )
 
   // Initialise source on mount and when algorithmId changes
+  // biome-ignore lint/correctness/useExhaustiveDependencies: intentionally scoped to mount + algorithmId change only; arraySize has its own setArraySize handler, stopInterval/buildGenerator close over refs and are stable in behavior though not memoized
   useEffect(() => {
     const entries = makeEntries(arraySize)
     sourceRef.current = entries
@@ -189,7 +190,6 @@ export function useAlgorithmPlayer(
     setStatus('idle')
     generatorRef.current = buildGenerator(entries)
     stopInterval()
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [algorithmId])
 
   // ── Interval management ──────────────────────────────────────────────
@@ -236,32 +236,35 @@ export function useAlgorithmPlayer(
     }, delay)
   }
 
+  // biome-ignore lint/correctness/useExhaustiveDependencies: cleanup-on-unmount only; stopInterval closes over refs and is stable in behavior though not memoized
   useEffect(() => {
     return () => stopInterval()
   }, [])
 
   // Restart interval when speed changes while playing
+  // biome-ignore lint/correctness/useExhaustiveDependencies: intentionally scoped to speed change only; status/startInterval are read fresh via closure and would defeat the intended trigger if added
   useEffect(() => {
     if (status === 'playing') {
       startInterval()
     }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [speed])
 
   // ── Actions ──────────────────────────────────────────────────────────
 
+  // biome-ignore lint/correctness/useExhaustiveDependencies: startInterval/statusRef close over refs and are stable in behavior though not memoized
   const play = useCallback(() => {
     if (statusRef.current === 'done') return
     setStatus('playing')
     startInterval()
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
+  // biome-ignore lint/correctness/useExhaustiveDependencies: stopInterval closes over refs and is stable in behavior though not memoized
   const pause = useCallback(() => {
     stopInterval()
     setStatus(prev => (prev === 'playing' ? 'paused' : prev))
   }, [])
 
+  // biome-ignore lint/correctness/useExhaustiveDependencies: stopInterval closes over refs and is stable in behavior though not memoized
   const reset = useCallback(() => {
     stopInterval()
     const entries = sourceRef.current
@@ -274,6 +277,7 @@ export function useAlgorithmPlayer(
     generatorRef.current = buildGenerator(entries)
   }, [buildGenerator])
 
+  // biome-ignore lint/correctness/useExhaustiveDependencies: stopInterval closes over refs and is stable in behavior though not memoized
   const randomize = useCallback(() => {
     stopInterval()
     const entries = makeEntries(arraySize)
@@ -287,16 +291,17 @@ export function useAlgorithmPlayer(
     generatorRef.current = buildGenerator(entries)
   }, [arraySize, buildGenerator])
 
+  // biome-ignore lint/correctness/useExhaustiveDependencies: advance closes over refs and is stable in behavior though not memoized
   const stepForward = useCallback(() => {
     pause()
     advance()
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [pause])
 
   const stepBackward = useCallback(() => {
     pause()
     if (historyRef.current.length <= 1) return
     historyRef.current.pop()
+    // biome-ignore lint/style/noNonNullAssertion: guarded above — length > 1 before pop() guarantees at(-1) exists
     const prev = historyRef.current.at(-1)!
     barsRef.current = prev
     setBars(prev)
@@ -321,6 +326,7 @@ export function useAlgorithmPlayer(
     setSpeedState(s)
   }, [])
 
+  // biome-ignore lint/correctness/useExhaustiveDependencies: stopInterval closes over refs and is stable in behavior though not memoized
   const setArraySize = useCallback(
     (size: number) => {
       setArraySizeState(size)

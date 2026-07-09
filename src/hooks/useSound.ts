@@ -46,6 +46,7 @@ export function useSound() {
     return ctxRef.current
   }
 
+  // biome-ignore lint/correctness/useExhaustiveDependencies: getCtx closes over a ref and is stable in behavior though not memoized; soundEnabled is the only reactive dep
   const playStep = useCallback(
     (step: Step, bars: BarState[]): void => {
       if (!soundEnabled) return

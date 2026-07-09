@@ -44,5 +44,5 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
 )
 Button.displayName = 'Button'
 
-// eslint-disable-next-line react-refresh/only-export-components
+// biome-ignore lint/style/useComponentExportOnlyModules: buttonVariants (cva factory) is shared alongside the component, matching shadcn/ui convention
 export { Button, buttonVariants }

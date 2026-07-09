@@ -41,6 +41,7 @@ export function Controls({
   const isBusy = isPlaying || status === 'paused'
 
   return (
+    // biome-ignore lint/a11y/useSemanticElements: <fieldset> brings UA default border/padding that would need a CSS reset; role="group" is the intentional lightweight equivalent
     <div
       className="flex flex-wrap items-center gap-2 rounded-lg border border-border bg-surface px-4 py-3"
       role="group"
@@ -101,6 +102,7 @@ export function Controls({
       </Button>
 
       {/* Speed */}
+      {/* biome-ignore lint/a11y/noLabelWithoutControl: Slider (Radix) receives its own aria-label on the interactive element; this label is a visual grouping wrapper */}
       <label className="flex items-center gap-2 text-sm text-text-muted">
         Speed
         <Slider
@@ -116,6 +118,7 @@ export function Controls({
       </label>
 
       {/* Array size */}
+      {/* biome-ignore lint/a11y/noLabelWithoutControl: Slider (Radix) receives its own aria-label on the interactive element; this label is a visual grouping wrapper */}
       <label className="flex items-center gap-2 text-sm text-text-muted">
         Size
         <Slider
