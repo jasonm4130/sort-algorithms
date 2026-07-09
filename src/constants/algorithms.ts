@@ -262,6 +262,36 @@ export const ALGORITHMS = [
     description:
       'Make a quantum observation of the array. All universes where it is not sorted are instantly destroyed. In the one surviving universe, it was already sorted. O(1) guaranteed.',
   },
+  {
+    id: 'communist-sort',
+    name: 'Communist Sort',
+    group: 'novelty',
+    timeComplexity: { best: 'O(n)', average: 'O(n)', worst: 'O(n)' },
+    spaceComplexity: 'O(1)',
+    stable: true,
+    description:
+      'Seizes the means of comparison: one redistribution pass reassigns every element the collective mean. All bars end equal — though when the total does not divide evenly, some are more equal than others.',
+  },
+  {
+    id: 'capitalist-sort',
+    name: 'Capitalist Sort',
+    group: 'novelty',
+    timeComplexity: { best: 'O(n²)', average: 'O(n²)', worst: 'O(n²)' },
+    spaceComplexity: 'O(1)',
+    stable: false,
+    description:
+      'Trickle-up economics: repeatedly takes the poorest bar\'s entire value and gives it to the richest, until one bar owns everything and the rest flatline at zero. The tycoon then rises to the top — technically sorted.',
+  },
+  {
+    id: 'robin-hood-sort',
+    name: 'Robin Hood Sort',
+    group: 'novelty',
+    timeComplexity: { best: 'O(n)', average: 'O(n log k)', worst: 'O(n·k)' },
+    spaceComplexity: 'O(1)',
+    stable: true,
+    description:
+      'Steals from the rich and gives to the poor: each round moves half the gap between the richest and poorest bars until everyone differs by at most one (k is the initial wealth gap). Communism, but with extra steps.',
+  },
 ] satisfies AlgorithmMeta[]
 
 export type AlgorithmId = typeof ALGORITHMS[number]['id']

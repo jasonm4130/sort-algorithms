@@ -26,6 +26,9 @@ import {
   slowSortSteps,
   miracleSortSteps,
   quantumBogoSortSteps,
+  communistSortSteps,
+  capitalistSortSteps,
+  robinHoodSortSteps,
 } from '../algorithms/index.ts'
 
 // ── Helpers ────────────────────────────────────────────────────────────────
@@ -67,6 +70,9 @@ const GENERATORS: Record<string, (arr: ArrayEntry[]) => Generator<Step>> = {
   'slow-sort': slowSortSteps,
   'miracle-sort': miracleSortSteps,
   'quantum-bogosort': quantumBogoSortSteps,
+  'communist-sort': communistSortSteps,
+  'capitalist-sort': capitalistSortSteps,
+  'robin-hood-sort': robinHoodSortSteps,
 }
 
 function applyStep(bars: BarState[], step: Step): BarState[] {
